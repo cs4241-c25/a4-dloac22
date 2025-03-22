@@ -21,9 +21,9 @@ const InputSection = ({ addPractice }) => {
   };
 
   return (
-    <Container className="mt-4">
-      <div className="p-4 rounded shadow" style={{backgroundColor: '#b3d7ff'}}>
-        <h1 className="text-center mb-4 fw-bold">Pool Practice Tracker</h1>
+    <Container fluid className="px-0 px-md-3">
+      <div className="p-3 p-md-4 rounded shadow" style={{backgroundColor: '#b3d7ff'}}>
+        <h1 className="text-center mb-3 mb-md-4 fw-bold fs-2 fs-md-1">Pool Practice Tracker</h1>
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="practice-type" className="fw-bold">
             <Form.Label>Practice Type:</Form.Label>
@@ -31,6 +31,7 @@ const InputSection = ({ addPractice }) => {
               as="select" 
               value={practiceType}
               onChange={(e) => setPracticeType(e.target.value)}
+              className="form-select"
             >
               <option>Select a practice type</option>
               <option value="Straight">Straight</option>
@@ -52,6 +53,7 @@ const InputSection = ({ addPractice }) => {
               value={duration}
               onChange={(e) => setDuration(e.target.value)}
               placeholder='How many minutes did you practice?'
+              className="form-control"
             />
           </Form.Group>
           <Form.Group controlId="score" className="mt-3 fw-bold">
@@ -64,9 +66,10 @@ const InputSection = ({ addPractice }) => {
               value={score}
               onChange={(e) => setScore(e.target.value)}
               placeholder='How would you rate your practice today?'
+              className="form-control"
             />
           </Form.Group>
-          <Button variant="success" type="submit" className="w-100 mt-3 fw-bold">ADD PRACTICE</Button>
+          <Button variant="success" type="submit" className="w-100 mt-3 fw-bold py-2">ADD PRACTICE</Button>
         </Form>
       </div>
     </Container>

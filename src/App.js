@@ -87,10 +87,10 @@ function App() {
 
   return (
     <div className="App">
-      <main className="container mt-4">
+      <main className="container-fluid px-3 px-md-4 py-3 py-md-4">
         {isLoggedIn && (
           <div className="d-flex justify-content-end mb-3">
-            <Button variant="outline-danger" onClick={handleSignOut}>
+            <Button variant="outline-danger" onClick={handleSignOut} className="px-3">
               Sign Out
             </Button>
           </div>
