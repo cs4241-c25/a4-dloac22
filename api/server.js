@@ -260,5 +260,15 @@ app.delete("/api/delete/:id", async (req, res) => {
     }
 });
 
+// Logout route
+app.get("/api/logout", (req, res) => {
+    req.logout((err) => {
+        if (err) {
+            return res.status(500).json({ message: "Error logging out" });
+        }
+        res.json({ message: "Logged out successfully" });
+    });
+});
+
 // Start the server
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import AuthSection from './components/AuthSection';
 import InputSection from './components/InputSection';
 import OutputSection from './components/OutputSection';
+import { Button } from 'react-bootstrap';
 
 function App() {
   const [records, setRecords] = useState([]);
@@ -24,6 +25,21 @@ function App() {
       }
     } catch (error) {
       console.error('Login status check error:', error);
+    }
+  };
+
+  const handleSignOut = async () => {
+    try {
+      const response = await fetch('/api/logout', {
+        method: 'GET',
+        credentials: 'include'
+      });
+      if (response.ok) {
+        setIsLoggedIn(false);
+        setRecords([]);
+      }
+    } catch (error) {
+      console.error('Logout error:', error);
     }
   };
 
@@ -72,6 +88,13 @@ function App() {
   return (
     <div className="App">
       <main className="container mt-4">
+        {isLoggedIn && (
+          <div className="d-flex justify-content-end mb-3">
+            <Button variant="outline-danger" onClick={handleSignOut}>
+              Sign Out
+            </Button>
+          </div>
+        )}
         {isLoggedIn ? (
           <>
             <InputSection addPractice={addPractice} />
