@@ -67,9 +67,6 @@ const AuthSection = ({ onLogin }) => {
                 <Button variant="success" type="submit">Login</Button>
                 <Button variant="primary" type="button" onClick={handleSignup}>Sign Up</Button>
               </div>
-              <div className="text-center mt-3">
-                <a href="https://a4-dattheloac.vercel.app/api/auth/github" className="text-primary">Login with GitHub</a>
-              </div>
             </Form>
           </div>
         </Col>
