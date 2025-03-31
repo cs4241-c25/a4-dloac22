@@ -4,7 +4,6 @@ const express = require("express"),
     passport = require("passport"),
     session = require("express-session"),
     LocalStrategy = require("passport-local").Strategy,
-    GitHubStrategy = require("passport-github2").Strategy,
     bodyParser = require("body-parser");
 
 const path = require("path");
@@ -57,47 +56,6 @@ app.use((req, res, next) => {
     res.setHeader('Content-Security-Policy', 'default-src \'self\'');
     next();
 });
-
-// GitHub Strategy
-passport.use(new GitHubStrategy({
-    clientID: process.env.GITHUB_CLIENT_ID,
-    clientSecret: process.env.GITHUB_CLIENT_SECRET,
-    callbackURL: process.env.VERCEL_URL ?
-        `https://a4-dattheloac.vercel.app/auth/github/callback` :
-        "http://localhost:3000/auth/github/callback"
-  },
-  async (accessToken, refreshToken, profile, done) => {
-    try {
-      let user = await User.findOne({ githubId: profile.id });
-
-      if (!user) {
-        user = new User({
-          githubId: profile.id,
-          username: profile.username
-        });
-        await user.save();
-      }
-
-      return done(null, user);
-    } catch (err) {
-      return done(err);
-    }
-  }
-));
-
-// GitHub Authentication Routes
-app.get('/api/auth/github',
-    passport.authenticate('github', { scope: ['user:email'] })
-);
-
-app.get('/api/auth/github/callback',
-    passport.authenticate('github', {
-      failureRedirect: '/'
-    }),
-    function (req, res) {
-        res.redirect('/InputSection');
-    }
-);
 
 // Passport strategy
 passport.use(new LocalStrategy(async (username, password, done) => {
